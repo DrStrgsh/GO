@@ -1,0 +1,10 @@
+<article class="post">
+  <section class="post-head">
+    <h2><%= link_to post.title, post_path(post) %></h2>
+    <small>
+      <p>Created at: <time><%= post.created_at.to_date.strftime("%e %B, %Y") %></time></p>
+      <p>Created by: <%= post.user.email %></p>
+      
+    </small>
+  </section>
+</article>
