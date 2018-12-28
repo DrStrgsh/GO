@@ -3,8 +3,6 @@
     New post
   </button><br><br>
 
-  <%= link_to "Date create", :sort => "created_at" %>
-  <%= link_to "Date update", :sort => "updated_at" %>
   <%= form_for(@post, remote: true) do |f| %>
     <% if @post.errors.any? %>
       <div id="error_explanation">

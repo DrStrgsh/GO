@@ -3,7 +3,7 @@
   <small id="smallcom">
     <section class="comment-body">
       <section class="comment-user">
-        <p><b><%= comment.user.username %></b>: <%= comment.body %> |
+        <p><b><%= comment.user.username %></b>: <%= comment.body.capitalize %> |
           <span class="date"><%= time_ago_in_words(comment.created_at) %>
             ago
           </span>

@@ -1,6 +1,6 @@
   <div class="card text-white bg-dark mb-3 text-center">
       <div class="card-body">
-          <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+          <h5 class="card-title"><%=  post.title %></h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= post.summary %></h6>
           <%= link_to "Go to it", post_path(post), class: "btn btn-outline-primary" %>
         <div class="card-footer">
