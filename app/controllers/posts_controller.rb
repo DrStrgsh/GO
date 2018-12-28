@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :update, :destroy, :like, :unlike]
+  impressionist actions: [:show], unique: [:impressionable_type, :impressionable_id, :session_hash]
 
   # GET /posts
   # GET /posts.json
@@ -84,6 +85,23 @@ class PostsController < ApplicationController
       end
     else
       redirect_to posts_path, notice: 'You do not have roots'
+    end
+  end
+
+  def like
+    @post.liked_by current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: post_path }
+      format.js { render layout: false }
+    end
+  end
+
+
+  def unlike
+    @post.unliked_by current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: post_path }
+      format.js { render layout: false }
     end
   end
 

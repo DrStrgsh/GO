@@ -5,6 +5,10 @@
       <p>Created at: <time><%= post.created_at.to_date.strftime("%e %B, %Y") %></time></p>
       <p>Created by: <%= post.user.email %></p>
       <p><%= pluralize(post.comments.count, "Comment") %></p>
+      <div class="panel-block views data">
+          <span class="icon"><i class="fa fa-eye"></i></span>
+          <%= pluralize(post.impressionist_count, 'View') %>
+      </div>
     </small>
   </section>
 </article>
