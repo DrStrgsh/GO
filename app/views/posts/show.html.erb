@@ -18,3 +18,27 @@
     <section class="post-body">
       <%= @post.body %>
     </section>
+
+    <div class="panel-block comments data">
+        <span class="icon"><i class="fa fa-comment"></i></span>
+        <%= pluralize(@post.comments.count, 'Comment') %>
+    </div>
+  </article>
+</article>
+
+<h5><%= pluralize(@post.comments.count, "Comment") %></h5>
+
+<div id="comment_pane">
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+    <%= form_with model: [@post, @comment] do |f| %>
+      <%= f.text_field :body %>
+      <%= f.submit "Comment" %>
+    <% end %>
+<% else %>
+  <small><p>For leave a comment, first <%= link_to 'Sign In', new_user_session_path, class: "link" %> or <%= link_to 'Sign Up', new_user_registration_path, class: "link" %> !</p></small>
+<% end %>

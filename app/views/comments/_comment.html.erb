@@ -1,0 +1,19 @@
+<div id="comment-<%= comment.id %>">
+<article class="comment">
+  <small id="smallcom">
+    <section class="comment-body">
+      <section class="comment-user">
+        <p><b><%= comment.user.username %></b>: <%= comment.body %> |
+          <span class="date"><%= time_ago_in_words(comment.created_at) %>
+            ago
+          </span>
+          <% if current_user.id == comment.user.id || current_user.admin? %>
+          |<%= link_to ' Delete', post_comment_path(@post, comment),
+           method: :delete, remote: true, data: {confirm: "Ary you sure?"}, class: "delete_com" %><br>
+          <% end %>
+        </p>
+      </section>
+    </section>
+  </small>
+</article>
+</div>

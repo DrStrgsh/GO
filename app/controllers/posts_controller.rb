@@ -11,7 +11,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    
+    @comment = Comment.new
+    @comments = @post.comments.order("created_at DESC")
   end
 
   # GET /posts/new
