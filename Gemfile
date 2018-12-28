@@ -8,6 +8,7 @@ gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record
 group :production do 
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Use Puma as the app server
@@ -20,6 +21,10 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 gem 'devise'
 gem 'omniauth-github'
+gem 'bootstrap', '~> 4.1.3'
+gem 'jquery-rails'
+gem 'acts_as_votable'
+gem 'impressionist'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
