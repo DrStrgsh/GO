@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   before_action :set_post
-  before_action :authenticate_user!
   def create
     if user_signed_in?
       @comment = @post.comments.new(comment_params)
