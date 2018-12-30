@@ -4,4 +4,5 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   is_impressionable
   acts_as_votable
+  mount_uploader :image, ImageUploader
 end

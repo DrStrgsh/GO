@@ -19,8 +19,10 @@
     </section>
 
     <section class="post-body">
+      <%= image_tag @post.image.url(:medium), class: 'img-show' if @post.image? %>
       <%= @post.body %>
     </section>
+    <br>
     <div class="column is-3 is-offset-1">
       <div class="nav panel show-post-analytics">
           <div class="panel-block views data">
