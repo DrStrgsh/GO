@@ -61,5 +61,5 @@
     <%= render @posts %>
   </div>
 <div class="pagination justify-content-center">
-  <%= will_paginate @posts, renderer: 'BootstrapPaginationHelper::LinkRenderer' %>
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
 </div>
