@@ -1,5 +1,6 @@
+<br>
 <div class="container-show">
-  <div class="container-cont">
+<div class="container-cont">
 <%= link_to '<Back', posts_path %>
 <article id="item">
   <article class="post">
@@ -57,11 +58,11 @@
   </article>
 
   <h5><%= pluralize(@post.comments.count, "Comment") %></h5>
-<div id="comment_pane">
-  <% @comments.each do |comment| %>
-    <%= render 'comments/comment', comment: comment %>
-  <% end %>
-</div>
+  <div id="comment_pane">
+    <% @comments.each do |comment| %>
+      <%= render 'comments/comment', comment: comment %>
+    <% end %>
+  </div>
 
 <% if user_signed_in? %>
   <%= form_with model: [@post, @comment] do |f| %>

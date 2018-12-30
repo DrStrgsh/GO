@@ -47,7 +47,9 @@
     </div>
   <% end %>
 <% else %>
+  <div class='msgsignin'>
   <p>To create a post, first <%= link_to 'Sign In', new_user_session_path, class: "link" %> or <%= link_to 'Sign Up', new_user_registration_path, class: "link" %> !</p>
+  </div>
   <br>
 <% end %>
 
