@@ -1,13 +1,7 @@
-  <div class="pscont">
-  <div>
-      <div class="pscol">
-          <h3><%= link_to post.title, post_path(post) %></h3>
-          <h6><%= post.summary %></h6>
-        <div class="crpst">
-          <small>Created by: <%= post.user.email %></small>
-          <small>Created at: <time><%= post.created_at.to_date.strftime("%e %B, %Y") %></time></small>
-        </div>
-      </div>
-  </div>
-  </div>
-  <br>
+    <div class="post">
+      <p class="date"><%= post.created_at.to_date.strftime("%d %B %Y") %></p>
+      <h2><%= link_to post.title, post_path(post) %></h2>
+      <h6><%= post.summary %></h6>
+      <p class="date"><%= post.user.email %></p>
+      <hr>
+    </div>

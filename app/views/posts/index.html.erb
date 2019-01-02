@@ -1,7 +1,16 @@
+	<h1 id="page_title">Forum</h1>
+
+  <div id="posts_wrapper" class="skinny_wrapper">
+    <%= link_to "New post", new_post_path, class: "button it-center" %>
+    <hr>
+    <div id="post-new">
+    	<%= render @posts %>
+    </div>
+	</div>
+
+		<%= will_paginate @posts %>
+
 <% if user_signed_in? %>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mynewpost">
-    New post
-  </button><br><br>
 
   <%= form_for(@post, remote: true) do |f| %>
     <% if @post.errors.any? %>
@@ -15,51 +24,29 @@
       </div>
     <% end %>
 
-    <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">Post</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <%= f.label :image %>
-              <%= f.file_field :image %>
-            </div>
-            <div class="field">
-              <%= f.label :title %><br>
-              <%= f.text_field :title, class: 'form-control post_title' %>
-            </div>
-            <div class="field">
-              <%= f.label :summary %>
-              <%= f.text_area :summary, class: 'form-control post_summary' %>
-            </div>
-            <div class="field">
-              <%= f.label :body %>
-              <%= f.text_area :body, class: 'form-control post_body' %>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="mynewpostclose">Go back</button>
-            <%= submit_tag "Create", class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
+    <h5 class="text-center" id="myModalLabel">Fast Post</h5>
+    <div id="fastpostnew" class="skinny_wrapper wrapper_padding">
+      <%= f.label :image %>
+      <%= f.file_field :image, class: "post_image" %>
+			<br><br>
+
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class: 'post_title' %>
+      <br>
+
+      <%= f.label :summary %>
+      <%= f.text_field :summary, class: 'post_summary textsum' %>
+      <br>
+
+      <%= f.label :body %>
+		  <%= f.text_area :body, class: 'post_body textarea' %>
+		  <br>
+
+      <%= submit_tag "Create", class: "button", id: "mynewpostclose" %>
     </div>
   <% end %>
 <% else %>
-  <div class='msgsignin'>
-  <p>To create a post, first <%= link_to 'Sign In', new_user_session_path, class: "link" %> or <%= link_to 'Sign Up', new_user_registration_path, class: "link" %> !</p>
-  </div>
-  <br>
-<% end %>
-
-  <div class="forposts" id="container_posts">
-    <%= render @posts %>
-  </div>
-<div class="pagination justify-content-center">
-  <%= will_paginate @posts, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
-</div>
+<div id="posts_wrapper" class="skinny_wrapper">
+	<p>To create a post, first <%= link_to 'Sign In', new_user_session_path, class: "link" %> or <%= link_to 'Sign Up', new_user_registration_path, class: "link" %> !</p>
+ </div> 
+<% end %>	

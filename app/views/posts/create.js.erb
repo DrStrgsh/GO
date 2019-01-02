@@ -1,6 +1,6 @@
-$("#mynewpost").modal('hide');
+$("#post-new").prepend('<%= j render @post %>');
+$(".post_image").val('');
 $(".post_title").val('');
 $(".post_summary").val('');
 $(".post_body").val('');
 
-$("#container_posts").prepend('<%= j render @post %>');

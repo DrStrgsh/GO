@@ -1,0 +1,80 @@
+<br>
+<div class="container-show">
+<div class="container-cont">
+<%= link_to '<Back', posts_path %>
+<article id="item">
+  <article class="post">
+    <section class="post-head">
+      <h1><%= @post.title %></h1>
+      <small>
+        <p>Created at: <time><%= @post.created_at.to_date.strftime("%d %B, %Y") %></time></p>
+        <p>Created by: <%= @post.user.email %></p>
+        <% if user_signed_in? %>
+          <% if @post.user.id == current_user.id || current_user.admin? %>
+            <%= link_to 'Edit', edit_post_path(@post) %> |
+            <%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm: 'Are you sure?'} %>
+          <% end %>
+        <% end %>
+      </small>
+    </section>
+
+    <section class="post-body">
+      <%= image_tag @post.image.url(:medium), class: 'img-show' if @post.image? %>
+      <%= @post.body %>
+    </section>
+    <br>
+    <div class="column is-3 is-offset-1">
+      <div class="nav panel show-post-analytics">
+          <div class="panel-block views data">
+              <span class="icon"><i class="fa fa-eye"></i></span>
+              <%= pluralize(@post.impressionist_count, 'View ') %>
+          </div>
+          <div class="panel-block comments data">
+              <span class="icon"><i class="fa fa-comment"></i></span>
+              <%= pluralize(@post.comments.count, 'Comment ') %>
+          </div>
+          <div class="panel-block likes data">
+            <div class="level-item likes data">
+              <div class="votes">
+                <% if user_signed_in? %>
+                  <% if current_user.liked? @post %>
+                    <%= link_to unlike_post_path(@post), method: :put, class: 'unlike_post' do %>
+                      <span class="icon" style="color: tomato"><i class="fa fa-heart has-text-primary"></i></span>
+                      <span class="vote_count"><%= @post.get_likes.size %></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to like_post_path(@post), method: :put, class: 'like_post' do %>
+                      <span class="icon"><i class="far fa-heart"></i></span>
+                      <span class="vote_count"><%= @post.get_likes.size %></span>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_post_path(@post), method: :put, class: 'like_post' do %>
+                    <span class="icon"><i class="far fa-heart"></i></span>
+                    <span class="vote_count"><%= @post.get_likes.size %></span>
+                  <% end %>
+                <% end %>
+              </div>
+      </div>
+  </div>
+  </article>
+
+  <h5><%= pluralize(@post.comments.count, "Comment") %></h5>
+  <div id="comment_pane">
+    <% @comments.each do |comment| %>
+      <%= render 'comments/comment', comment: comment %>
+    <% end %>
+  </div>
+
+<% if user_signed_in? %>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_field :body %>
+    <%= f.submit "Comment" %>
+  <% end %>
+<% else %>
+  <small><p>For leave a comment, first <%= link_to 'Sign In', new_user_session_path, class: "link" %> or <%= link_to 'Sign Up', new_user_registration_path, class: "link" %> !</p></small>
+<% end %>
+</div>
+<br>
+<br>
+</div>

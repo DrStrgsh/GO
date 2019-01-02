@@ -11,28 +11,22 @@
     </div>
   <% end %>
 
-  <div class="form-group">
     <%= form.label :image %>
     <%= form.file_field :image %>
-  </div>
+    <br><br>
 
-  <div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title, class: "form-control" %>
-  </div>
+    <%= form.text_field :title, class: "" %>
+    <br>
 
-  <div class="form-group">
     <%= form.label :summary %>
-    <%= form.text_area :summary, class: "form-control"%>
-  </div>
+    <%= form.text_field :summary, class: "textsum"%>
+    <br>
 
-  <div class="form-group">
     <%= form.label :body %>
-    <%= form.text_area :body, class: "form-control" %>
-  </div>
+    <%= form.text_area :body, class: "textarea" %>
+    <br>
 
-  <div class="form-group">
-    <%= form.submit 'Create post', class: "btn btn-success"%>
-    <%= link_to 'Back', posts_path, class: "btn btn-primary" %>
-  </div>
+    <%= form.submit 'Create post', class: "button"%>
+    <%= link_to 'Back', :back, class: "button" %>
 <% end %>

@@ -1,3 +1,26 @@
-<div class="container welcome">
-  <h1><%= link_to'GO', posts_path() %></h1>
-</div>
+<div class="wrapper wrapper_padding clearfix">
+		<div class="col-1 about homepage_content">
+			<h2>About</h2>
+			<hr>
+			<p>I am a student, I am interested in different programming languages, one of my favorites is Rubie, as well as Ruby on Rails framework.</p>
+			<p>My goal is to become a web developer. This is important to me, because that's what I'm interested in. For me, this is a kind of art.</p>
+			<p>My second goal is to learn how to develop android apps.</p>
+		</div>
+		<div class="col-2 homepage_content">
+			<h2>The newest posts</h2>
+			<hr>
+			<% @nposts.each do |npost| %>
+				<%= render 'posts/npost', npost: npost %>
+			<% end %>
+		</div>
+		<div class="col-3 homepage_content">
+			<h2>The most popular</h2>
+			<hr>
+			<h3><a href="#">Coming soon...</a></h3>
+			<p class="date">Coming soon...</p>
+			<h3><a href="#">Coming soon...</a></h3>
+			<p class="date">Coming soon...</p>
+			<h3><a href="#">Coming soon...</a></h3>
+			<p class="date">Coming soon...</p>			
+		</div>
+	</div>
