@@ -3,22 +3,16 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show update destroy like unlike]
   impressionist actions: [:show], unique: %i[impressionable_type impressionable_id session_hash]
-
-  # GET /posts
-  # GET /posts.json
   def index
     @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
     @post = Post.new
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @comment = Comment.new
     @comments = @post.comments.order('created_at DESC')
   end
 
-  # GET /posts/new
   def new
     if user_signed_in?
       @post = Post.new
@@ -27,7 +21,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1/edit
   def edit
     if user_signed_in? && (current_user || current_user.admin?)
       @post = Post.find(params[:id])
@@ -36,8 +29,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     if user_signed_in?
       @post = current_user.posts.new(post_params)
@@ -58,8 +49,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     if (@post.user == current_user || current_user.admin?) && user_signed_in?
       respond_to do |format|
@@ -76,8 +65,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     if (@post.user == current_user || current_user.admin?) && user_signed_in?
       @post.destroy
@@ -108,13 +95,17 @@ class PostsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :summary, :body, :image, :user_id)
+    params.require(:post).permit(
+      :title,
+      :summary, 
+      :body, 
+      :image, 
+      :user_id
+    )
   end
 end
