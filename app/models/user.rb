@@ -1,5 +1,6 @@
-class User < ApplicationRecord
+# frozen_string_literal: true
 
+class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
   acts_as_voter
@@ -8,12 +9,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, :omniauth_providers => [:github]
+         :omniauthable, omniauth_providers: [:github]
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       # user.name = auth.info.name   # assuming the user model has a name
       # user.image = auth.info.image # assuming the user model has an image
       # If you are using confirmable and the provider(s) you use validate emails,
@@ -24,13 +25,13 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.github_data"] && session["devise.github_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
+      if data = session['devise.github_data'] && session['devise.github_data']['extra']['raw_info']
+        user.email = data['email'] if user.email.blank?
       end
     end
   end
 
   def username
-    return email.split('@')[0].capitalize
+    email.split('@')[0].capitalize
   end
 end
