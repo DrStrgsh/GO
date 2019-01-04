@@ -1,0 +1,11 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - 'config/initializers'
+    - 'db/**/*'
+
+Metrics/BlockLength: 
+  Max: 60
+
+Style/Documentation:
+  Enabled: false

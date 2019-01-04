@@ -1,10 +1,23 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show update destroy like unlike]
-  impressionist actions: [:show], unique: %i[impressionable_type impressionable_id session_hash]
+  before_action :set_post, only: %i[
+    show
+    update
+    destroy
+    like
+    unlike
+  ]
+  impressionist actions: [:show], unique: %i[
+    impressionable_type
+    impressionable_id
+    session_hash
+  ]
   def index
-    @posts = Post.all.order('created_at DESC').paginate(page: params[:page], per_page: 5)
+    @posts = Post.all.order('created_at DESC').paginate(
+      page: params[:page],
+      per_page: 5
+    )
     @post = Post.new
   end
 
@@ -35,14 +48,19 @@ class PostsController < ApplicationController
 
       respond_to do |format|
         if @post.save
-          format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
-          format.json { render :show, status: :created, location: @post }
-          format.js
+          format.html do
+            redirect_to posts_path, notice: 'Post was successfully created.'
+          end
+          format.json do
+            render :show, status: :created, location: @post
+          end
         else
           format.html { render :new }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-          format.js
+          format.json do
+            render json: @post.errors, status: :unprocessable_entity
+          end
         end
+        format.js
       end
     else
       redirect_to posts_path, notice: 'Signing in please'
@@ -53,11 +71,17 @@ class PostsController < ApplicationController
     if (@post.user == current_user || current_user.admin?) && user_signed_in?
       respond_to do |format|
         if @post.update(post_params)
-          format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-          format.json { render :show, status: :ok, location: @post }
+          format.html do
+            redirect_to @post, notice: 'Post was successfully updated.'
+          end
+          format.json do
+            render :show, status: :ok, location: @post
+          end
         else
           format.html { render :edit }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
+          format.json do
+            render json: @post.errors, status: :unprocessable_entity
+          end
         end
       end
     else
@@ -69,7 +93,9 @@ class PostsController < ApplicationController
     if (@post.user == current_user || current_user.admin?) && user_signed_in?
       @post.destroy
       respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+        format.html do
+          redirect_to posts_url, notice: 'Post was successfully destroyed.'
+        end
         format.json { head :no_content }
       end
     else
@@ -100,12 +126,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(
-      :title,
-      :summary, 
-      :body, 
-      :image, 
-      :user_id
-    )
+    params.require(:post).permit(:title, :summary, :body, :image, :user_id)
   end
 end

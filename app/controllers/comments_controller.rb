@@ -15,10 +15,11 @@ class CommentsController < ApplicationController
   def destroy
     if user_signed_in?
       @comment = @post.comments.find(params[:id])
-      @comment_id = @comment.id
-      @comment.destroy
+      @comment_id = @comment.id && @comment.destroy
       respond_to do |format|
-        format.html { redirect_to post_url, notice: 'Comment was successfully destroyed.' }
+        format.html do
+          redirect_to post_url, notice: 'Comment was successfully destroyed.'
+        end
         format.json { head :no_content }
       end
     else
